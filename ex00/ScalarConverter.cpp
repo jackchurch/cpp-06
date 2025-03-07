@@ -166,8 +166,8 @@ void convertInputFromPseudo(std::string input)
     {        
 		std::cout << "char:\tPlease regard this message: Your conversion is impossible." << std::endl;
 		std::cout << "int:\tPlease regard this message: Your conversion is impossible." << std::endl;
-		std::cout << "float: " << input << std::endl;
-        std::cout << "double: " << input.substr(0, input.length() - 1) << std::endl;
+		std::cout << "float:\t" << input << std::endl;
+        std::cout << "double:\t" << input.substr(0, input.length() - 1) << std::endl;
     }
     // if fake double
     if (input == "-inf" || input == "+inf" || input == "nan")
@@ -193,6 +193,6 @@ void ScalarConverter::convert( const std::string &input )
     else if (inputIsDouble(input))
         convertInputFromDouble(input);
     else
-        throw std::invalid_argument("\n\nThis is a message to tell the user the input is invalid:\n\n\tYour input is invalid.\n\t\tPlease go away.\n\t\t[Blows raspberries at user.]\n\n");
+        throw std::invalid_argument("\n\nThis is a message to tell the user the input is invalid:\n\n\tYour input is invalid.\n\t\t[Blows raspberries at user.]\n\n");
     return ;
 }
