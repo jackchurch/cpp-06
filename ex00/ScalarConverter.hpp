@@ -10,6 +10,7 @@
 #include <cmath>
 #include <limits>
 #include <sstream>
+#include <iomanip>
 
 class ScalarConverter {
 public:
