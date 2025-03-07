@@ -9,6 +9,7 @@
 #include <cfloat>
 #include <cmath>
 #include <limits>
+#include <sstream>
 
 class ScalarConverter {
 public:
