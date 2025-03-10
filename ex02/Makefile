@@ -1,4 +1,4 @@
-NAME = convert
+NAME = a.out
 CODEDIRS = . 
 INCDIRS = .
 SOURCETYPE = cpp
@@ -8,7 +8,7 @@ OPT = -O0
 DEPFLAGS = -MP -MD
 CFLAGS=-Wall -Wextra -Werror -std=c++98 $(foreach D,$(INCDIRS),-I$(D)) $(OPT) 
 
-CFILES = main.cpp Base.cpp A.cpp B.cpp C.cpp
+CFILES = main.cpp
 OBJECTS = $(patsubst %.$(SOURCETYPE),%.o,$(CFILES))
 DEPFILES = $(patsubst %.$(SOURCETYPE),%.d,$(CFILES))
 

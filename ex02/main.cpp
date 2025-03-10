@@ -1,41 +1,79 @@
-#include "Serializer.hpp"
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
-void    printOut(Data d)
+
+Base*   genrate(void)
 {
-    std::cout << "\t\tchar:\t" << d.c << std::endl;
-    std::cout << "\t\tint:\t" << d.i << std::endl;
-    std::cout << "\t\tstring:\t" << d.s << std::endl;
-    std::cout << std::endl;
+    int r = std::rand() % 3;
+    switch (r)
+    {
+        case 0:
+            std::cout << "Generate:\t\t\tA" << std::endl;
+            return (new A());
+        case 1:
+            std::cout << "Generate:\t\t\tB" << std::endl;
+            return (new B());
+        case 2:
+                std::cout << "Generate:\t\t\tC" << std::endl;
+                return (new C());
+        default:
+            std::cerr << "Random number error" << std::endl;
+            return (NULL);
+    }
 }
 
-// Reminder to Jack, we arn't actually serlising data. Just casting with a class called Serlizer. 
-
-int main(void)
+void    identify(Base* p)
 {
-    Data    input;
-    Data*   output;
+    if (dynamic_cast<A*>(p))
+        std::cout << "Identify base direct:\t\tA" << std::endl;
+    else if (dynamic_cast<B*>(p))
+        std::cout << "Identify base direct:\t\tB" << std::endl;
+    else if (dynamic_cast<C*>(p))
+        std::cout << "Identify base direct:\t\tC" << std::endl;
+    else
+        std::cerr << "Identify base direct: Unknown type" << std::endl;
+}
 
-    std::cout << std::endl;
-    std::cout << "Creat data in 'input' struct..." << std::endl;
-    input.c = 'a';
-    input.i = 1;
-    input.s = "My first sring";
-    std::cout << "Address of data:\t" << &input << std::endl;
-    printOut(input);
+void    identify(Base& p)
+{
+    if (dynamic_cast<A*>(&p))
+        std::cout << "Identify base pointer:\t\tA" << std::endl;
+    else if (dynamic_cast<B*>(&p))
+        std::cout << "Identify base pointer:\t\tB" << std::endl;
+    else if (dynamic_cast<C*>(&p))
+        std::cout << "Identify base pointer:\t\tC" << std::endl;
+    else
+        std::cerr << "Identify base pointer: Unknown type" << std::endl;
+}
+//    std::cout << "float:\t" << static_cast<float>(i) << ".0f" << std::endl;
 
-    std::cout << "Serializing 'input'..." << std::endl;
-    uintptr_t   hidden = Serializer::serialize(&input);
-    std::cout <<"uintptr_t address: " << &hidden << std::endl;
-    std::cout << std::endl;
+void    a(void) {
+	system("leaks a.out");
+}
 
-    std::cout << "De-Serializing serlized data into new struct 'output'..." << std::endl;
-    output = Serializer::deserialize(hidden);
-    std::cout << "Address of data:\t" << &output << std::endl;
-    printOut(*output);
+int     main()
+{
+    // atexit(a);
+    srand(time(NULL));
+    int i = 0;
+    while (i < 10)
+    {
+        std::cout << std::endl;
+        Base *p = genrate();
+        identify(p);
+        identify(*p);
+        delete p;
+        i++;
+    }
 
-    std::cout << "Check first struct is still there at the origal address..." << std::endl;
-    std::cout << "Address of data:\t" << &input << std::endl;
-    printOut(input);
+    std::cout << "Try a fail..." << std::endl;
+    Base* unknown = new Base();
+    identify(unknown);
+    identify(*unknown);
+    delete unknown;
 
     return (0);
 }
+

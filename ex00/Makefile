@@ -1,4 +1,4 @@
-NAME = convert
+NAME = a.out
 CODEDIRS = . 
 INCDIRS = .
 SOURCETYPE = cpp
