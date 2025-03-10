@@ -8,7 +8,9 @@
 class ScalarConverter {
 public:
     ~ScalarConverter ();
-    static void convert(const std::string &input);
+    ScalarConverter const &operator=(const ScalarConverter &orignal);
+
+	static void convert(const std::string &input);
 
     class InvalidInput : public std::exception
 	{
@@ -22,7 +24,6 @@ public:
 private:
     ScalarConverter();
     ScalarConverter(const ScalarConverter &orignal);
-    ScalarConverter const &operator=(const ScalarConverter &orignal);
 };
 
 #endif

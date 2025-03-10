@@ -6,9 +6,9 @@ ScalarConverter::ScalarConverter(void)
     std::cout << "Calling deconstructor..." << std::endl;
 }
 
-ScalarConverter::ScalarConverter( ScalarConverter const &copy)
+ScalarConverter::ScalarConverter( ScalarConverter const &orignal)
 {
-	(void)copy;
+	*this = orignal;
 }
 
 ScalarConverter::~ScalarConverter()
@@ -16,10 +16,11 @@ ScalarConverter::~ScalarConverter()
     std::cout << "Deconstructor called." << std::endl;
 }
 
-ScalarConverter const &ScalarConverter::operator=( const ScalarConverter &copy )
+ScalarConverter const &ScalarConverter::operator=( const ScalarConverter &orignal )
 {
-	(void)copy;
-	return(*this);
+    if (this == &orignal) // Making g++ happy
+        return (*this);
+    return (*this);
 }
 
 void    nonDisplayable(void)

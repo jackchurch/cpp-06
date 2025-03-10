@@ -8,7 +8,7 @@ OPT = -O0
 DEPFLAGS = -MP -MD
 CFLAGS=-Wall -Wextra -Werror -std=c++98 $(foreach D,$(INCDIRS),-I$(D)) $(OPT) 
 
-CFILES = main.cpp ScalarConverter.cpp
+CFILES = main.cpp Base.cpp A.cpp B.cpp C.cpp
 OBJECTS = $(patsubst %.$(SOURCETYPE),%.o,$(CFILES))
 DEPFILES = $(patsubst %.$(SOURCETYPE),%.d,$(CFILES))
 
